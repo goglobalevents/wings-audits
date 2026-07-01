@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wings — Website Audits for Sydney Small Businesses | Speed & SEO</title>
+<meta name="description" content="Wings runs plain-English website audits for Sydney small businesses. We find what's slowing your site down and costing you customers — then help you fix it. Free first audit.">
+<meta name="theme-color" content="#0b1526">
+<link rel="canonical" href="https://wingsaudits.com.au/">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Wings — Let us help you spread your wings">
+<meta property="og:description" content="Plain-English website speed & SEO audits for Sydney small businesses. Find what's costing you customers. Free first audit.">
+<meta property="og:locale" content="en_AU">
+<meta property="og:url" content="https://wingsaudits.com.au/">
+
+<!-- Favicon: inline SVG wing so there's zero extra request -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 24C10 8 22 6 28 6c0 8-6 18-20 20 4-6 9-9 13-11-6 1-12 4-17 9z' fill='%236ba8e0'/%3E%3C/svg%3E">
+
+<!-- LocalBusiness / ProfessionalService structured data (the rich-snippet magic) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Wings",
+  "description": "Website speed and SEO audits for small businesses in Sydney, Australia.",
+  "url": "https://wingsaudits.com.au/",
+  "email": "hello@wingsaudits.com.au",
+  "areaServed": { "@type": "City", "name": "Sydney" },
+  "address": { "@type": "PostalAddress", "addressRegion": "NSW", "addressCountry": "AU" },
+  "slogan": "Let us help you spread your wings",
+  "priceRange": "$$",
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Speed Audit" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO Audit" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Mobile & UX Audit" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Rebuild" } }
+  ]
+}
+</script>
+
+<!-- Fonts: Cormorant Garamond (display), Inter (body), Great Vibes (cursive logo) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    /* ---- Wings palette: Deep Navy & Sky ----
+       Role-based tokens. To reskin the whole site, change only these values. */
+    --bg:#0b1526;        /* page background            */
+    --bg-2:#0e1a30;      /* alternating section bands  */
+    --panel:#13223c;     /* cards / panels             */
+    --panel-2:#1a2d4d;   /* raised panels              */
+    --panel-3:#24406b;   /* brightest panel / glow     */
+    --text:#eef2f8;      /* main text                  */
+    --text-dim:#c5d1e0;  /* secondary text             */
+    --muted:#8b9cb5;     /* muted labels               */
+    --accent:#6ba8e0;    /* sky accent / buttons       */
+    --accent-bright:#8dc0ec; /* hover / emphasis       */
+    --on-accent:#08172b; /* text on top of accent      */
+    --warn:#e0956b;      /* warm "needs work" tone     */
+    --line:rgba(107,168,224,.24);
+    --line-soft:rgba(238,242,248,.1);
+    --display:"Cormorant Garamond",Georgia,serif;
+    --script:"Great Vibes",cursive;
+    --body:"Inter",system-ui,-apple-system,sans-serif;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--text);font-family:var(--body);
+    font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.04;letter-spacing:-.01em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:500}
+
+  /* ---- Buttons ---- */
+  .btn{display:inline-block;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:14px 26px;border-radius:2px;transition:all .22s;cursor:pointer;font-weight:500}
+  .btn-accent{background:var(--accent);color:var(--on-accent);font-weight:600}
+  .btn-accent:hover{background:var(--accent-bright);transform:translateY(-1px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);background:rgba(107,168,224,.06)}
+
+  /* ---- Scroll reveal ---- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+
+  /* ================= HEADER ================= */
+  header{position:sticky;top:0;z-index:50;background:rgba(11,21,38,.72);
+    backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{display:flex;align-items:baseline;gap:.55rem}
+  .logo .mark{font-family:var(--script);font-size:2.3rem;line-height:1;color:var(--accent-bright)}
+  .logo .tag{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);font-family:var(--body)}
+  nav.main{display:flex;gap:30px;align-items:center}
+  nav.main a{font-size:.82rem;letter-spacing:.06em;color:var(--text-dim);transition:color .2s}
+  nav.main a:hover,nav.main a.active{color:var(--text)}
+  .bar-cta{display:flex;align-items:center;gap:18px}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;padding:6px}
+  .burger span{width:24px;height:1.5px;background:var(--text)}
+  .mmenu{display:none;border-top:1px solid var(--line-soft);padding:8px 0}
+  .mmenu.open{display:block}
+  .mmenu a{display:block;padding:12px 28px;font-size:.95rem;color:var(--text-dim)}
+
+  /* ================= HERO ================= */
+  .hero{position:relative;padding:118px 0 96px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;background:
+    radial-gradient(1100px 520px at 78% -8%,rgba(107,168,224,.16),transparent 60%),
+    radial-gradient(900px 600px at 8% 110%,rgba(36,64,107,.6),transparent 55%)}
+  .hero .wrap{position:relative;z-index:1}
+  .hero-mark{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+  .hero-mark .rule{height:1px;width:46px;background:var(--accent)}
+  .hero-mark span{font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent)}
+  .hero h1{font-size:clamp(2.9rem,6.4vw,5.6rem);max-width:16ch}
+  .hero h1 i{font-style:italic;color:var(--accent-bright);font-weight:400}
+  .hero .lede{margin-top:30px;max-width:56ch;font-size:1.12rem;color:var(--text-dim);line-height:1.7}
+  .hero-actions{margin-top:42px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-actions .btn{padding:15px 30px;font-size:.82rem}
+  .scroll-hint{margin-top:64px;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);display:flex;align-items:center;gap:10px}
+  .scroll-hint .l{width:34px;height:1px;background:var(--line)}
+
+  /* ================= TRUST LEDGER ================= */
+  .ledger-row{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .ledger-row .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .lcell{padding:34px 0;text-align:center;border-right:1px solid var(--line-soft)}
+  .lcell:last-child{border-right:0}
+  .lcell .num{font-family:var(--display);font-size:2.4rem;color:var(--text);line-height:1}
+  .lcell .lab{margin-top:10px;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+
+  /* ================= SECTION FRAME ================= */
+  .block{padding:96px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:54px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(2.1rem,4.2vw,3.3rem);max-width:20ch}
+  .sec-head p{max-width:42ch;color:var(--text-dim);font-size:1rem}
+
+  /* ================= SERVICES ================= */
+  .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  .svc{border:1px solid var(--line-soft);border-radius:3px;background:var(--panel);
+    padding:38px 34px;transition:all .22s}
+  .svc:hover{border-color:var(--accent);transform:translateY(-3px);background:var(--panel-2)}
+  .svc .k{font-family:var(--display);font-size:1.2rem;color:var(--accent);margin-bottom:14px}
+  .svc h3{font-size:1.9rem;margin-bottom:10px}
+  .svc p{color:var(--text-dim);font-size:.97rem;max-width:44ch}
+
+  /* ================= HOW IT WORKS ================= */
+  .how{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .step{padding:0 34px;border-right:1px solid var(--line-soft)}
+  .step:first-child{padding-left:0}
+  .step:last-child{border-right:0;padding-right:0}
+  .step .n{font-family:var(--display);font-size:2.6rem;color:var(--accent);line-height:1;margin-bottom:16px}
+  .step h3{font-size:1.5rem;margin-bottom:8px}
+  .step p{color:var(--muted);font-size:.95rem}
+
+  /* ================= PROOF / WHY ================= */
+  .proof .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center}
+  .proof h2{font-size:clamp(2rem,3.6vw,3rem);margin:18px 0 22px}
+  .proof p.intro{color:var(--text-dim);margin-bottom:26px;max-width:48ch}
+  .stat-list{display:flex;flex-direction:column;gap:16px}
+  .sitem{display:flex;gap:18px;align-items:baseline;padding-bottom:16px;border-bottom:1px solid var(--line-soft)}
+  .sitem .big{font-family:var(--display);font-size:2rem;color:var(--accent-bright);min-width:2.6em;line-height:1}
+  .sitem span{font-size:.95rem;color:var(--muted)}
+  /* sample audit card */
+  .audit{background:linear-gradient(160deg,var(--panel-2),var(--bg-2));
+    border:1px solid var(--line);border-radius:4px;padding:34px 32px}
+  .audit .head{display:flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+  .audit .head .dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+  .arow{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--line-soft)}
+  .arow:last-child{border-bottom:0}
+  .arow .lbl{color:var(--text-dim);font-size:.95rem}
+  .arow .val{font-family:var(--display);font-size:1.4rem}
+  .arow .val.bad{color:var(--warn)}
+  .arow .val.good{color:var(--accent-bright)}
+
+  /* ================= PRICING ================= */
+  .price{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .plan{background:var(--panel);border:1px solid var(--line-soft);border-radius:4px;
+    padding:40px 34px;display:flex;flex-direction:column}
+  .plan.featured{border-color:var(--accent);background:linear-gradient(160deg,var(--panel-2),var(--bg-2));position:relative}
+  .plan.featured .tab{position:absolute;top:-11px;left:34px;background:var(--accent);color:var(--on-accent);
+    font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 12px;border-radius:2px}
+  .plan h3{font-size:1.7rem;margin-bottom:6px}
+  .plan .amt{font-family:var(--display);font-size:2.8rem;color:var(--accent-bright);line-height:1;margin:8px 0 4px}
+  .plan .amt small{font-family:var(--body);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+  .plan ul{list-style:none;margin:22px 0 28px;display:grid;gap:12px}
+  .plan li{display:flex;gap:11px;color:var(--text-dim);font-size:.94rem}
+  .plan li::before{content:"—";color:var(--accent)}
+  .plan .btn{margin-top:auto;text-align:center}
+
+  /* ================= FAQ ================= */
+  .faq{max-width:820px;margin:0 auto;display:grid;gap:14px}
+  details{background:var(--panel);border:1px solid var(--line-soft);border-radius:3px;padding:4px 26px}
+  summary{cursor:pointer;font-family:var(--display);font-size:1.35rem;padding:20px 0;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:20px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-size:1.6rem;color:var(--accent);transition:.2s;font-family:var(--body)}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--text-dim);padding:0 0 22px;font-size:.98rem;max-width:64ch}
+
+  /* ================= CONTACT ================= */
+  .inquire{background:linear-gradient(180deg,var(--bg-2),var(--bg));border-top:1px solid var(--line)}
+  .inq-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:64px;align-items:start}
+  .inq-grid h2{font-size:clamp(2.1rem,4vw,3.2rem);margin:18px 0 22px;max-width:14ch}
+  .inq-grid .sub{color:var(--text-dim);max-width:42ch;margin-bottom:30px}
+  .inq-contact{margin-top:34px;display:flex;flex-direction:column;gap:14px}
+  .inq-contact a,.inq-contact div{font-size:.95rem;color:var(--text);display:flex;gap:12px;align-items:center}
+  .inq-contact .ic{color:var(--accent);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;min-width:64px}
+  form{display:grid;gap:16px}
+  .field{display:grid;gap:7px}
+  label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  input,textarea{font:inherit;font-size:1rem;padding:14px 16px;border-radius:2px;
+    border:1px solid var(--line);background:rgba(11,21,38,.6);color:var(--text)}
+  input::placeholder,textarea::placeholder{color:var(--muted)}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  form .btn{justify-self:start;border:0}
+
+  /* ================= FOOTER ================= */
+  footer{border-top:1px solid var(--line);padding:44px 0;color:var(--muted);font-size:.85rem}
+  .foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;align-items:center}
+  .foot .mark{font-family:var(--script);font-size:2rem;color:var(--accent-bright);line-height:1}
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:1000px){
+    .proof .wrap,.inq-grid{grid-template-columns:1fr;gap:44px}
+    .svc-grid,.price{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .step{border-right:0;border-bottom:1px solid var(--line-soft);padding:26px 0}
+    .step:first-child{padding-top:0}
+    .step:last-child{border-bottom:0}
+  }
+  @media (max-width:760px){
+    nav.main,.bar-cta .btn{display:none}
+    .burger{display:flex}
+    .ledger-row .wrap{grid-template-columns:repeat(2,1fr)}
+    .lcell:nth-child(2n){border-right:0}
+    .lcell:nth-child(-n+2){border-bottom:1px solid var(--line-soft)}
+    .sec-head{flex-direction:column;align-items:flex-start}
+    .hero{padding:80px 0 70px}
+    .block{padding:70px 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="wrap bar">
+    <a href="#top" class="logo" aria-label="Wings home">
+      <span class="mark">Wings</span>
+      <span class="tag">Website Audits</span>
+    </a>
+    <nav class="main">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="bar-cta">
+      <a href="#contact" class="btn btn-accent">Free audit</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mmenu" id="mmenu">
+    <a href="#services">Services</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Free audit</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-mark reveal"><span class="rule"></span><span>Website audits · Sydney small business</span></div>
+    <h1 class="reveal">Let us help you <i>spread your wings.</i></h1>
+    <p class="lede reveal">Your website might be quietly turning customers away — loading too slowly, invisible on Google, awkward on phones. Wings finds exactly what's holding you back, in plain English, and shows you how to fix it.</p>
+    <div class="hero-actions reveal">
+      <a href="#contact" class="btn btn-accent">Get your free audit</a>
+      <a href="#how" class="btn btn-ghost">See how it works</a>
+    </div>
+    <div class="scroll-hint reveal"><span class="l"></span>What we look at, below</div>
+  </div>
+</section>
+
+<!-- ================= TRUST LEDGER ================= -->
+<div class="ledger-row">
+  <div class="wrap">
+    <div class="lcell reveal"><div class="num">Free</div><div class="lab">First audit</div></div>
+    <div class="lcell reveal"><div class="num">~2 days</div><div class="lab">Turnaround</div></div>
+    <div class="lcell reveal"><div class="num">Zero</div><div class="lab">Lock-in contracts</div></div>
+    <div class="lcell reveal"><div class="num">100%</div><div class="lab">Plain English</div></div>
+  </div>
+</div>
+
+<!-- ================= SERVICES ================= -->
+<section class="block" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="reveal">Four ways we help you take off.</h2>
+      <p class="reveal">Start with an audit. Fix it yourself with our report, or let us handle everything.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal">
+        <div class="k">01</div>
+        <h3>Speed audit</h3>
+        <p>We run your site through Google's own performance engine and pinpoint what's making it slow — heavy images, bloated code, poor hosting — with a prioritised fix list.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="k">02</div>
+        <h3>SEO audit</h3>
+        <p>We check how findable you are on Google: missing page titles, thin content, no local listing, broken links — the things quietly costing you traffic and calls.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="k">03</div>
+        <h3>Mobile &amp; UX audit</h3>
+        <p>Most of your customers are on a phone. We test how your site truly feels on mobile and flag anything that frustrates people before they book or buy.</p>
+      </div>
+      <div class="svc reveal">
+        <div class="k">04</div>
+        <h3>Website rebuild</h3>
+        <p>No website, or one beyond repair? We build fast, modern, mobile-first sites that load in under a second and are built to rank — for a fair fixed price.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW IT WORKS ================= -->
+<section class="block how" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="reveal">Simple, honest, no tech-speak.</h2>
+      <p class="reveal">You'll always understand exactly what we found and why it matters to your business.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="n">I</div>
+        <h3>We audit — free</h3>
+        <p>Send us your web address. Within a couple of days we send back a clear, plain-English report on what's working and what isn't.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">II</div>
+        <h3>We show the wins</h3>
+        <p>A prioritised list: the handful of fixes that'll make the biggest difference to speed, ranking and enquiries — with the numbers behind them.</p>
+      </div>
+      <div class="step reveal">
+        <div class="n">III</div>
+        <h3>You choose</h3>
+        <p>Take the report and DIY, or hand it to us. No pressure, no lock-in contracts. We only win when your site does.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROOF / WHY ================= -->
+<section class="block proof" id="why">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Why it matters</span>
+      <h2>A slow, hard-to-find website is a leaky bucket.</h2>
+      <p class="intro">Every second your site takes to load, more visitors leave. If Google can't understand your pages, your competitor gets the call instead. Most owners have no idea it's happening — because nobody ever told them.</p>
+      <div class="stat-list">
+        <div class="sitem"><span class="big">53%</span><span>of mobile visitors leave a site that takes longer than 3 seconds to load.</span></div>
+        <div class="sitem"><span class="big">#1</span><span>thing people use to judge a business's credibility? Its website.</span></div>
+        <div class="sitem"><span class="big">75%</span><span>of people never scroll past the first page of Google results.</span></div>
+      </div>
+    </div>
+    <div class="audit reveal" role="img" aria-label="Example website audit showing poor scores before Wings and strong scores after">
+      <div class="head"><span class="dot"></span> Sample audit · your-business.com.au</div>
+      <div class="arow"><span class="lbl">Mobile speed</span><span class="val bad">34 / 100</span></div>
+      <div class="arow"><span class="lbl">SEO health</span><span class="val bad">48 / 100</span></div>
+      <div class="arow"><span class="lbl">Loads in</span><span class="val bad">7.9s</span></div>
+      <div class="arow"><span class="lbl">Mobile friendly</span><span class="val bad">Needs work</span></div>
+      <div class="arow"><span class="lbl">After Wings</span><span class="val good">92 / 100</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="block" id="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="reveal">Clear pricing, no surprises.</h2>
+      <p class="reveal">Start free. Upgrade only if you want the detail — or the fixes done for you.</p>
+    </div>
+    <div class="price">
+      <div class="plan reveal">
+        <h3>Free Snapshot</h3>
+        <div class="amt">$0</div>
+        <ul>
+          <li>Mobile speed &amp; SEO score</li>
+          <li>Top 3 issues we spot</li>
+          <li>Plain-English summary</li>
+          <li>Delivered in ~2 days</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Start free</a>
+      </div>
+      <div class="plan featured reveal">
+        <span class="tab">Most popular</span>
+        <h3>Full Audit</h3>
+        <div class="amt">$149 <small>one-off</small></div>
+        <ul>
+          <li>Complete speed, SEO &amp; mobile review</li>
+          <li>Full prioritised fix list</li>
+          <li>Competitor comparison</li>
+          <li>30-min call to walk you through it</li>
+        </ul>
+        <a href="#contact" class="btn btn-accent">Book a full audit</a>
+      </div>
+      <div class="plan reveal">
+        <h3>Done For You</h3>
+        <div class="amt">From $499</div>
+        <ul>
+          <li>We implement the fixes</li>
+          <li>Or a full modern rebuild</li>
+          <li>Fixed quote before we start</li>
+          <li>Ongoing care plans available</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="block" id="faq">
+  <div class="wrap">
+    <div class="sec-head" style="justify-content:center;text-align:center">
+      <h2 class="reveal" style="max-width:none">Good questions, straight answers.</h2>
+    </div>
+    <div class="faq">
+      <details open>
+        <summary>Is the first audit really free?</summary>
+        <p>Yes. We send you a snapshot of your site's speed and SEO scores plus the top issues, at no cost and with no obligation. It's how we show you we're worth talking to.</p>
+      </details>
+      <details>
+        <summary>I'm not techy — will I understand the report?</summary>
+        <p>That's the whole point of Wings. No jargon. We explain what each issue means, why it matters to your customers and sales, and what to do about it — in plain English.</p>
+      </details>
+      <details>
+        <summary>Do I have to let you do the fixes?</summary>
+        <p>Never. Take the report and fix things yourself or with your current developer. We're happy to help if you want us to, but there's no pressure and no lock-in.</p>
+      </details>
+      <details>
+        <summary>What if I don't even have a website yet?</summary>
+        <p>Perfect timing. We build fast, modern, mobile-first sites designed to be found on Google — for a fair fixed price. Just tell us about your business in the form below.</p>
+      </details>
+      <details>
+        <summary>Do you only work with Sydney businesses?</summary>
+        <p>We're Sydney-based and love working with local businesses, but audits are done remotely — so we can help anywhere in Australia.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="block inquire" id="contact">
+  <div class="wrap inq-grid">
+    <div class="reveal">
+      <span class="eyebrow">Start the conversation</span>
+      <h2>Claim your free audit</h2>
+      <p class="sub">Tell us your web address (or that you need one built). A specialist replies within two business days with your free snapshot.</p>
+      <div class="inq-contact">
+        <a href="mailto:hello@wingsaudits.com.au"><span class="ic">Email</span> hello@wingsaudits.com.au</a>
+        <div><span class="ic">Area</span> Sydney, NSW · serving all of Australia</div>
+        <div><span class="ic">Reply</span> Within 2 business days</div>
+      </div>
+    </div>
+    <!-- Replace the form action with your Formspree/Getform endpoint. -->
+    <form action="https://formspree.io/f/your-form-id" method="POST" class="reveal">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" required placeholder="Jane Smith">
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required placeholder="jane@yourbusiness.com.au">
+      </div>
+      <div class="field">
+        <label for="site">Your website (or "need one built")</label>
+        <input id="site" name="website" type="text" placeholder="yourbusiness.com.au">
+      </div>
+      <div class="field">
+        <label for="msg">Anything you'd like us to look at?</label>
+        <textarea id="msg" name="message" rows="3" placeholder="e.g. my site feels slow on phones"></textarea>
+      </div>
+      <button type="submit" class="btn btn-accent">Send my free audit request</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot">
+    <a href="#top" class="logo"><span class="mark">Wings</span></a>
+    <span>Let us help you spread your wings · Sydney, NSW · ABN [add your ABN]</span>
+    <span>© <span id="yr"></span> Wings</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  var burger=document.getElementById('burger'), mmenu=document.getElementById('mmenu');
+  burger.addEventListener('click',function(){mmenu.classList.toggle('open')});
+  mmenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mmenu.classList.remove('open')})});
+  // Current year
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  // Scroll reveal
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+</body>
+</html>
